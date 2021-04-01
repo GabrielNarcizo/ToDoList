@@ -1,3 +1,4 @@
+const chalk = require('chalk')
 const express = require('express');
 const app = express()
 const port = 3000
@@ -9,6 +10,6 @@ usuarioController(app);
 tarefaController(app);
 
 app.listen(port, () => {
-    console.log(`Example app listening at http://localhost:${port}`)
+    console.log(chalk.green('[SUCESSO]: '),`Example app listening at http://localhost:${port}`)
 });
 
