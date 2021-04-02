@@ -5,7 +5,8 @@ function tarefaController(app) {
     });
 
     app.post('/tarefa', (req, res) => {
-        res.send('Rota POST de tarefa ativada: tarefa adicionada ao banco de dados')
+        console.log('Rota POST de tarefa ativada: tarefa adicionada ao banco de dados')
+        res.send(req.body)
     })
 
 }

@@ -5,7 +5,8 @@ function usuarioController(app) {
     });
 
     app.post('/usuario', (req, res) => {
-        res.send('Rota POST de usuario ativada: usuário adicionado ao bando de dados')
+        console.log('Rota POST de usuario ativada: usuário adicionado ao bando de dados')
+        res.send(req.body)
     })
 
 }
