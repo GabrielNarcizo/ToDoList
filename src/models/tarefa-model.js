@@ -7,3 +7,5 @@ class TarefaModel {
         this._data = data
     }
 };
+
+module.exports = TarefaModel

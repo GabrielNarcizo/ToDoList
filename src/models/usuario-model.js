@@ -5,3 +5,5 @@ class UsuarioModel {
         this._username = username
     }
 };
+
+module.exports = UsuarioModel;
