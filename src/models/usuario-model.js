@@ -1,9 +1,11 @@
 class UsuarioModel {
-    constructor(id, username){
+    constructor(id, nome, email, senha){
 
-        this._id = id,
-        this._username = username
-    }
-};
+        this.id = id,
+        this.nome = nome,
+        this.email = email,
+        this.senha = senha
+    };
+}
 
 module.exports = UsuarioModel;

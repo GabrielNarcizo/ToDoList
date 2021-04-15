@@ -1,4 +1,4 @@
 module.exports = {
-    usuarios: [],
-    tarefas: []
+    usuario: [],
+    tarefa: []
 }

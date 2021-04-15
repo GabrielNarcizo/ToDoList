@@ -1,14 +1,16 @@
 const chalk = require('chalk');
 const express = require('express');
 const bodyParser = require('body-parser');
-const bd = require('./infra/bd')
-const app = express()
-const port = 3000
-
+const cors = require('cors')
+const bd = require('./infra/sqlite-db');
+const app = express();
+const port = 3000;
 const usuarioController = require('./Controllers/usuario-controller')
 const tarefaController = require('./Controllers/tarefa-controller')
 
-app.use(bodyParser.json())
+app.use(bodyParser.json());
+app.use(cors())
+
 usuarioController(app, bd);
 tarefaController(app, bd);
 
