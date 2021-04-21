@@ -76,3 +76,6 @@ O projeto é em Node.js então precisa ter o node instalado: https://nodejs.org/
 ### Executar projeto 🔙🔚:
 Depois de instalar todas as dependências, rode o comando no terminal para a aplicação ser iniciada:
 - `npm run start`
+
+###Autor: 
+**Eli Gabriel Narcizo**
