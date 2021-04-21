@@ -1,71 +1,69 @@
-const usuarioModelo = require("../models/usuario-model")
-const usuarioDAO = require('../DAO/usuario-dao')
+const UsuarioModel = require("../models/usuario-model")
+const UsuarioDAO = require('../DAO/usuario-dao')
 
-const { response } = require("express");
 
 function usuarioController(app, bd) {
 
-    const DAO = new usuarioDAO(bd)
+    const DAO = new UsuarioDAO(bd);
 
-    app.get('/usuarios', (req, res) => {
-        DAO.listarUsuarios()
-            .then((usuarios) => { res.send(usuarios) })
-            .catch((err) => res.send('Falha ao listar os usuários')) 
-    })
+    app.get('/usuario', async (req, res) => {
+        try {
+            let usuario = await DAO.listarUsuarios()
+            res.status(200).send(usuario);
+        } catch (e) {
+            res.status(500).send({mensagem: "Falha ao listar usuarios."})
+        }
+        
+    });
 
     
+    app.get("/usuario/:email", async (req, res) =>{
+        try{
+            let email = req.params.email;
+            let usuarioEmail = await DAO.listarEmail(email)
+            res.status(200).send(usuarioEmail);
+        } catch (e) {
+            res.status(500).send({mensagem: "Falha ao listar usuario."})
+        }
 
-    app.get("/usuarios/:email", (req, res) =>{
-        const usuarios = bd.usuario;
-        const email = req.params.email;
-
-        usuarios.forEach((usuario) => {
-            console.log(usuario);
-            if(email === usuario.email) {
-                return res.send(usuario)
-            } else {
-                res.send('E-mail não cadastrado')
-            }
-        })
     });
 
-    app.post('/usuarios', (req, res) => {
-        const body = req.body
-        let usuario = new usuarioModelo(0, body.nome, body.email, body.senha);
+    app.post('/usuario', async (req, res) => {
+        try {
+            const body = req.body;
+            let usuarios = new UsuarioModel(0, body.NOME, body.EMAIL, body.SENHA);
+            const novoUsuario = await DAO.inserirUsuario(usuarios);
+            res.status(201).send(novoUsuario)
+
+        } catch (e) {
+            res.status(500).send({mensagem: "Falha ao criar novo usuario."})
+        }
         
-        bd.run('INSERT INTO USUARIOS (NOME, EMAIL, SENHA) VALUES(?, ?, ?)'
-            , [usuario.nome, usuario.email, usuario.senha]
-            , (err) => { if (err) throw new Error(err)})
+    });
+    
+    app.put('/usuario/:email', async (req, res) =>{
+        try {
+            const body = req.body;
+            let email = req.params.email;
+            await DAO.alterarUsuario(email, body)
+            res.status(202).send({mensagem: "Usuario alterado com sucesso!"})
 
-        res.send({mensagem: "Usuário criado com sucesso."})
+        } catch (e) {
+            res.satus(500).send({mensagem: "Falha ao alterar usuario."})
+        }
+        
+
     });
 
-    app.delete('/usuarios/:email', (req, res) => {
-        const usuarios = bd.usuario;
-        const email = req.params.email;
-
-        for(let i = 0; i < usuarios.length; i++){
-            if(email === usuarios[i].email){
-                usuarios.splice(i, 1);
-                return res.send(`{"Mensagem: "<${email} deletado}`)
-            } else {
-                res.send(`${email} não encontrado`)
-            }
-        };        
-    });
-
-    app.put('/usuarios/:email', (req, res) =>{
-        const body = req.body.email;
-        let usuarios = bd.usuario;
-        const email = req.params.email;
-
-        for(let i = 0; i < usuarios.length; i++){
-            if(email === usuarios[i].email){
-                usuarios = body;
-            };
-        };
-
-        res.send(`{"Mensagem: "<${email} atualizado}`)
+    app.delete('/usuario/:email', async(req, res) => {
+        try {
+            let email = req.params.email;
+            await DAO.deletarUsuario(email);
+            res.status(200).send({mensagem:  "Usuario deletado com sucesso!"})
+        } catch (e) {
+            res.status(500).send({mensagem: "Falha ao remover usuario."})
+        }
+        
     });
 
 };

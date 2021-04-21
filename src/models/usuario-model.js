@@ -1,4 +1,4 @@
-class UsuarioModel {
+class UsuarioModelo {
     constructor(id, nome, email, senha){
 
         this.id = id,
@@ -8,4 +8,4 @@ class UsuarioModel {
     };
 }
 
-module.exports = UsuarioModel;
+module.exports = UsuarioModelo;

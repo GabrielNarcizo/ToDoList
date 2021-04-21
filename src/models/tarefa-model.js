@@ -1,11 +1,13 @@
-class TarefaModel {
-    constructor(id, task, status, data){
+class TarefaModelo {
+    constructor(id, titulo, descricao, status, datacriacao, id_usuario){
 
-        this._id = id,
-        this._task = task,
-        this._status = status,
-        this._data = data
+        this.id = id,
+        this.titulo = titulo,
+        this.descricao = descricao,
+        this.status = status,
+        this.datacriacao = datacriacao,
+        this.id_usuario = id_usuario
     }
 };
 
-module.exports = TarefaModel
+module.exports = TarefaModelo;
