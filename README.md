@@ -53,9 +53,9 @@ Projeto feito durando o **módulo 3** da Resilia educação, o desafio era criar
 
 ## Instalando as dependências do projeto 💻⌨
 
-O projeto é em Node.js então precisa ter o node instalado: https://nodejs.org/en/
+Dê fork no projeto. O projeto é em Node.js então precisa ter o node instalado: https://nodejs.org/en/
 
-***A partir daqui as instalações serão no terminal, segue a lista de comandos***
+***A partir daqui as instalações serão no terminal(Windows), segue a lista de comandos***
 
 **NPM:**
 - `npm install`
